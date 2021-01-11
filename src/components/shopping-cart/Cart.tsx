@@ -1,6 +1,6 @@
-import React, { FC, useContext } from "react";
+import React, { ChangeEvent, FC, useContext } from "react";
 import styles from "./CartList.module.scss";
-import { IProductCart, ShoppingCartContextType } from "./types";
+import { IProductCart } from "./types";
 import { ShoppingContext } from "./ShoppingContext";
 import config from "../../config.json";
 
@@ -10,13 +10,23 @@ interface IProps {
 
 export const Cart: FC<IProps> = (props) => {
   const { id, name, image, price, quantity } = props.cart;
-  const {
-    incQuantity,
-    subQuantity,
-    setQuantity,
-    updatePrice,
-    removeProduct,
-  } = useContext(ShoppingContext) as ShoppingCartContextType;
+  const { setQuantity, updatePrice, removeProduct } = useContext(
+    ShoppingContext
+  );
+
+  const addQuantity = (id: number, value: number) => {
+    setQuantity(id, quantity + value);
+  };
+
+  const handleInputQuantity = (
+    e: ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    const quantity = e.target.value;
+    if (parseInt(quantity) || quantity === "" || quantity[0] === "0") {
+      setQuantity(id, parseInt(quantity));
+    }
+  };
 
   return (
     <div className={styles.gridItem}>
@@ -39,20 +49,20 @@ export const Cart: FC<IProps> = (props) => {
         <div className={styles.quantityBox}>
           <button
             className={styles.quantityButton}
-            onClick={() => subQuantity(id)}
+            onClick={() => addQuantity(id, -1)}
           >
             -
           </button>
           <input
             title={`${quantity}`}
-            onChange={(e) => setQuantity(e, id)}
+            onChange={(e) => handleInputQuantity(e, id)}
             className={styles.quantityInput}
             type={"text"}
             value={quantity}
           />
           <button
             className={styles.quantityButton}
-            onClick={() => incQuantity(id)}
+            onClick={() => addQuantity(id, +1)}
           >
             +
           </button>

@@ -13,9 +13,18 @@ import {
   ShoppingCartContextType,
 } from "./types";
 import config from "../../config.json";
-export const ShoppingContext = createContext<ShoppingCartContextType | null>(
-  null
-);
+
+export const ShoppingContext = createContext<ShoppingCartContextType>({
+  productCarts: [],
+  addProductToCart: () => {},
+  totalPrice: 0,
+  updatePrice: () => {},
+  shippingPrice: 0,
+  checkout: () => {},
+  removeProduct: () => {},
+  isCheckout: false,
+  setQuantity: () => {},
+});
 
 export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   const defaultShippingPrice = 23.8;
@@ -32,7 +41,7 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   const addProductToCart = (id: number, quantity?: number) => {
     const isInShoppingCart = productCarts.find((product) => product.id === id);
     if (isInShoppingCart) {
-      addQuantity(id, quantity ? quantity : 1);
+      setQuantity(id, quantity ? isInShoppingCart.quantity + quantity : 1);
       return;
     }
     const productCart = productList.find((product) => product.id === id);
@@ -58,52 +67,24 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   const getProductCarts = async () => {
     const res = await fetch(`${config.API_URL}/data/cart_products.json`);
     const carts = (await res.json()) as IProduct_Cart[];
-    if (productList.length != 0) {
+    if (productList.length !== 0) {
       carts.forEach((cart) => {
         addProductToCart(cart.productId, cart.quantity);
       });
     }
   };
 
-  const subQuantity = (id: number) => {
-    productCarts.filter((product) => {
-      if (product.id === id) {
-        if (product.quantity > 1) {
-          --product.quantity;
-          setProductCarts([...productCarts]);
-        }
-      }
-    });
-  };
-
-  const incQuantity = (id: number) => {
-    productCarts.filter((product) => {
-      if (product.id === id) {
-        ++product.quantity;
-        setProductCarts([...productCarts]);
-      }
-    });
-  };
-  const addQuantity = (id: number, quantity: number) => {
-    productCarts.filter((product) => {
-      if (product.id === id) {
-        product.quantity += quantity;
-        product.quantity = product.quantity > 0 ? product.quantity : 1;
-        setProductCarts([...productCarts]);
-      }
-    });
-  };
-  const setQuantity = (e: ChangeEvent<HTMLInputElement>, id: number) => {
-    const quantity = e.target.value;
-    if (parseInt(quantity) || quantity === "" || quantity[0] === "0") {
-      productCarts.filter((product) => {
-        if (product.id === id) {
-          product.quantity =
-            quantity && quantity !== "0" ? parseInt(quantity) : 1;
-          setProductCarts([...productCarts]);
-        }
-      });
-    }
+  const setQuantity = (id: number, quantity: number) => {
+    setProductCarts(
+      productCarts.map((product) =>
+        product.id === id
+          ? {
+              ...product,
+              quantity,
+            }
+          : product
+      )
+    );
   };
 
   const updatePrice = () => {
@@ -122,7 +103,7 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   };
 
   const removeProduct = (id: number) => {
-    const newCartList = productCarts.filter((product) => product.id != id);
+    const newCartList = productCarts.filter((product) => product.id !== id);
     setProductCarts(newCartList);
   };
 
@@ -153,14 +134,12 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
         productCarts,
         shippingPrice,
         totalPrice,
-        subQuantity,
-        incQuantity,
-        setQuantity,
         updatePrice,
         removeProduct,
         checkout,
         isCheckout,
         addProductToCart,
+        setQuantity,
       }}
     >
       {props.children}

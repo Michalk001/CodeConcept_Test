@@ -1,1 +1,20 @@
-{}
+{
+  "shoppingCart": {
+    "updateCart": "Update Shopping Cart",
+    "empty": "There are no more items in your cart",
+    "checkout": "Your order has been submitted successfully",
+    "title": "Shopping Cart"
+  },
+  "product": {
+    "productName": "Product Name",
+    "unitPrice": "Unit Price",
+    "quantity": "Quantity"
+  },
+  "summary": {
+    "free": "free",
+    "cartTotals": "Cart totals",
+    "subtotal": "subtotal",
+    "grandTotal": "grand total",
+    "proceedCheckout": "Proceed to checkout"
+  }
+}

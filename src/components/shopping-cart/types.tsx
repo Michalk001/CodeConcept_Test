@@ -18,9 +18,7 @@ export interface IProductCart extends IProduct {
 
 export type ShoppingCartContextType = {
   productCarts: IProductCart[];
-  subQuantity: (id: number) => void;
-  incQuantity: (id: number) => void;
-  setQuantity: (e: ChangeEvent<HTMLInputElement>, id: number) => void;
+  setQuantity: (id: number, quantity: number) => void;
   totalPrice: number;
   shippingPrice: number;
   updatePrice: () => void;

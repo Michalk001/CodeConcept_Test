@@ -47,7 +47,7 @@
     "build": "webpack --config ./webpack.config.js --mode production ",
     "test": "jest --setupFiles ./src/setupTests.ts --watchAll ",
     "eject": "react-scripts eject",
-    "prettier": "prettier --check ."
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
