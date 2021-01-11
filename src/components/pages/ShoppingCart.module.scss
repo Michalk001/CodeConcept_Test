@@ -11,28 +11,27 @@
   }
 }
 
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0 20px 0;
   row-gap: 10px;
   flex-wrap: wrap;
-
 }
-.title{
+.title {
   font-size: 24px;
   color: $main-color;
   text-transform: capitalize;
 }
 
-.button{
+.button {
   @media (max-width: 425px) {
     width: 100%;
     padding: 0 10px;
   }
 }
 
-.message{
+.message {
   text-align: center;
 }

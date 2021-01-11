@@ -1,11 +1,10 @@
 @import "../variables";
 
-
-.summary{
+.summary {
   flex: 3 100px;
 }
 
-.wrap{
+.wrap {
   position: sticky;
   top: 20px;
   @media (max-width: 1024px) {
@@ -14,9 +13,9 @@
   }
 }
 
-.titleSection{
+.titleSection {
   background-color: $background-color-main;
-  border:1px solid $border-color;
+  border: 1px solid $border-color;
   font-size: 18px;
   font-weight: 700;
   display: flex;
@@ -25,51 +24,48 @@
   text-transform: uppercase;
 }
 
-.total{
+.total {
   margin-top: 20px;
 }
 
-.content{
-    border:1px solid $border-color;
-    border-top: none;
-    padding: 20px;
-    background-color: $background-color-secondary;
-  }
+.content {
+  border: 1px solid $border-color;
+  border-top: none;
+  padding: 20px;
+  background-color: $background-color-secondary;
+}
 
-%section{
+%section {
   display: flex;
   justify-content: space-between;
   padding: 10px 15px;
   font-size: 16px;
 }
 
-.subtotal{
+.subtotal {
   @extend %section;
   border-bottom: 1px solid $border-color;
-
 }
-.grandTotal{
+.grandTotal {
   @extend %section;
   align-items: center;
 }
 
-.text{
+.text {
   text-transform: capitalize;
   color: $main-color;
   font-weight: 700;
 }
-.price{
+.price {
   color: black;
   font-weight: 700;
   align-items: center;
-
 }
-.priceLarge{
+.priceLarge {
   font-size: 21px;
   font-weight: 700;
 }
-.button{
+.button {
   margin-top: 20px;
   width: 100%;
-
 }

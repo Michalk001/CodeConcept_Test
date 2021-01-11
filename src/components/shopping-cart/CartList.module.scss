@@ -1,69 +1,69 @@
 @import "../variables";
 
-
 .cartList {
   flex: 10 100px;
   border: 1px solid $border-color;
   border-radius: 3px;
   padding: 40px;
   box-sizing: border-box;
-  box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
-  -webkit-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
-  -moz-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
+  box-shadow: 3px 3px 5px -4px rgba(0, 0, 0, 0.57);
+  -webkit-box-shadow: 3px 3px 5px -4px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 3px 3px 5px -4px rgba(0, 0, 0, 0.57);
   @media (max-width: 768px) {
     padding: 5px 5px 10px;
   }
 }
 
-
 .grid {
   display: grid;
-  grid-template-columns: 40px repeat(2,minmax(100px,2fr)) minmax(110px,3fr) minmax(70px,3fr) minmax(130px,3fr);
+  grid-template-columns:
+    40px repeat(2, minmax(100px, 2fr)) minmax(110px, 3fr) minmax(70px, 3fr)
+    minmax(130px, 3fr);
   grid-template-rows: 1fr;
   gap: 0 20px;
-  grid-template-areas:
-    "remove image image name price quantity";
+  grid-template-areas: "remove image image name price quantity";
   align-items: center;
+}
 
- }
-
-.gridTitle{
+.gridTitle {
   @extend .grid;
   @media (max-width: 768px) {
     display: none;
   }
 }
 
-.gridItem{
+.gridItem {
   @extend .grid;
   padding: 20px 5px;
   border-bottom: 1px solid #d0d0d0;
   @media (max-width: 768px) {
     gap: 0 10px;
     padding: 20px 0;
-    grid-template-rows: repeat(2,1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-template-areas:
-    "remove image image name  name"
-    "remove image image price quantity";
-    grid-template-columns: minmax(20px,40px) repeat(2,50px) minmax(50px,3fr) minmax(130px,3fr);
+      "remove image image name  name"
+      "remove image image price quantity";
+    grid-template-columns: minmax(20px, 40px) repeat(2, 50px) minmax(50px, 3fr) minmax(
+        130px,
+        3fr
+      );
   }
   @media (max-width: 425px) {
-    grid-template-rows: repeat(3,1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-template-areas:
-    "remove image image name  name"
-    "remove image image price price"
-    "remove image image quantity quantity";
-    grid-template-columns: 20px repeat(2,50px) 70px 60px ;
+      "remove image image name  name"
+      "remove image image price price"
+      "remove image image quantity quantity";
+    grid-template-columns: 20px repeat(2, 50px) 70px 60px;
   }
 }
-.items{
+.items {
   margin: 20px 0;
   border-top: 1px solid $border-color;
 }
- %item-text-style{
-   color: $main-color;
-   word-break: break-all;
-
+%item-text-style {
+  color: $main-color;
+  word-break: break-all;
 }
 
 %title-text-style {
@@ -74,119 +74,115 @@
   }
 }
 
-.remove{
+.remove {
   grid-area: remove;
   cursor: pointer;
   text-align: center;
   @media (max-width: 425px) {
-    & > img{
+    & > img {
       width: 20px;
     }
   }
 }
 
-.image{
+.image {
   grid-area: image;
   text-align: center;
-  &Item{
+  &Item {
     @extend .image;
     @extend %item-text-style;
-    & > img{
+    & > img {
       max-width: 150px;
       @media (max-width: 768px) {
-
-          max-width: 100px;
-
+        max-width: 100px;
       }
     }
   }
 }
 
-
-.name{
+.name {
   grid-area: name;
   &Item {
     @extend .name;
     @extend %item-text-style;
   }
-  &Title{
+  &Title {
     @extend .name;
     @extend %title-text-style;
   }
 }
 
-
-.price{
+.price {
   grid-area: price;
-  &Item{
+  &Item {
     @extend .price;
     @extend %item-text-style;
     font-weight: 700;
   }
-  &Title{
+  &Title {
     @extend .price;
     @extend %title-text-style;
-
   }
 }
 
-.quantity{
+.quantity {
   grid-area: quantity;
   align-items: center;
   justify-content: center;
-  &Box{
+  &Box {
     display: flex;
   }
-  &Item{
+  &Item {
     @extend .quantity;
     display: flex;
     & > div {
       display: inline;
     }
   }
-  &Title{
+  &Title {
     @extend .quantity;
     @extend %title-text-style;
   }
 
-  &Button{
+  &Button {
     background-color: $background-color-main;
     padding: 6px 11px;
     border: 1px solid $border-color;
     cursor: pointer;
-    &:active{
-      box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
-      -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
-      -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+    &:active {
+      box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.57) inset;
+      -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.57) inset;
+      -moz-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.57) inset;
     }
-    &:focus{
+    &:focus {
       outline: none;
     }
   }
-  &Input{
+  &Input {
     padding: 5px;
     text-align: center;
     width: 23px;
-    &:active, &:focus{
-      box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
-      -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
-      -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+    &:active,
+    &:focus {
+      box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.57) inset;
+      -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.57) inset;
+      -moz-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.57) inset;
     }
-    &:focus{
+    &:focus {
       outline: none;
     }
   }
-  &Update{
+  &Update {
     margin-left: 2px;
     position: relative;
     padding-top: 1px;
-    & > img{
+    & > img {
       cursor: pointer;
     }
   }
 }
 
-.bottom{
+.bottom {
   display: flex;
   justify-content: flex-end;
   padding: 0 10px;

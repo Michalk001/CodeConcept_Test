@@ -2,21 +2,20 @@ $button-background-color: #050203;
 $button-txt-color: #fff;
 $button-hover-txt-color: #cbcbcb;
 
-.button{
+.button {
   background-color: $button-background-color;
   color: $button-txt-color;
   font-size: 16px;
   padding: 10px 15px;
   display: inline-block;
   font-weight: 700;
-  border:none;
+  border: none;
   width: inherit;
-  &:hover{
+  &:hover {
     cursor: pointer;
-    color:$button-hover-txt-color;
+    color: $button-hover-txt-color;
   }
-  &:focus{
-    outline:none;
+  &:focus {
+    outline: none;
   }
-
 }
