@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ItemList = () =>{
+export const CartList = () =>{
 
     return(
         <div>Item List</div>

@@ -1,0 +1,21 @@
+$button-background-color: #050203;
+$button-txt-color: #fff;
+$button-hover-txt-color: #cbcbcb;
+
+.button{
+  background-color: #050203;
+  color: $button-txt-color;
+  padding: 10px 15px;
+  display: inline-block;
+  font-weight: 700;
+  border:none;
+  &:hover{
+    cursor: pointer;
+    color:$button-hover-txt-color;
+  }
+  &:focus{
+    outline:none;
+  }
+
+
+}

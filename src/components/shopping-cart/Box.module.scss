@@ -1,0 +1,39 @@
+@import "../variables";
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0 20px;
+  grid-template-areas:
+    "Cart Cart Cart TotalPrice"
+    "Cart Cart Cart TotalPrice"
+
+}
+
+
+.cart {
+  grid-area: Cart;
+  border: 1px solid $border-color;
+  border-radius: 3px;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
+  -webkit-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
+  -moz-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
+}
+
+.totalPrice {
+  grid-area: TotalPrice;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 20px 0;
+}
+.title{
+  font-size: 24px;
+  color: $main-color;
+}

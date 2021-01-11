@@ -1,0 +1,125 @@
+@import "../variables";
+
+.grid {
+   display: grid;
+   grid-template-columns: 40px 2fr 2fr 3fr 3fr 3fr;
+   grid-template-rows: 1fr;
+   gap: 0 20px;
+   grid-template-areas:
+    "remove image image name price quantity";
+   align-items: center;
+ }
+
+.gridItem{
+  @extend .grid;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  padding: 20px 5px;
+  margin: 20px 0;
+}
+
+ %item-text-style{
+  color: $main-color;
+}
+
+%title-text-style {
+  color: $main-color;
+  font-weight: 700;
+}
+
+.remove{
+  grid-area: remove;
+  cursor: pointer;
+  text-align: center;
+}
+
+.image{
+  grid-area: image;
+  text-align: center;
+  &Item{
+    @extend .image;
+    @extend %item-text-style;
+  }
+}
+
+
+.name{
+  grid-area: name;
+  &Item {
+    @extend .name;
+    @extend %item-text-style;
+  }
+  &Title{
+    @extend .name;
+    @extend %title-text-style;
+  }
+}
+
+
+.price{
+  grid-area: price;
+  &Item{
+    @extend .price;
+    @extend %item-text-style;
+  }
+  &Title{
+    @extend .price;
+    @extend %title-text-style;
+  }
+}
+
+.quantity{
+  grid-area: quantity;
+  align-items: center;
+  display: flex;
+  &Item{
+    @extend .quantity;
+    & > div {
+      display: inline;
+    }
+  }
+  &Title{
+    @extend .quantity;
+    @extend %title-text-style;
+  }
+
+  &Button{
+    background-color: #f4f4f4;
+    padding: 6px 11px;
+    border: 1px solid #b3b3b3;
+    cursor: pointer;
+    &:active{
+      box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+      -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+      -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+  &Input{
+    padding: 5px;
+    text-align: center;
+    width: 20px;
+    &:active, &:focus{
+      box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+      -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+      -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+  &Update{
+    margin-left: 2px;
+    position: relative;
+    padding-top: 1px;
+    cursor: pointer;
+  }
+}
+
+.bottom{
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 10px;
+}
