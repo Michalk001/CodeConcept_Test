@@ -6,6 +6,7 @@ interface CssExports {
   'gridItem': string;
   'image': string;
   'imageItem': string;
+  'items': string;
   'name': string;
   'nameItem': string;
   'nameTitle': string;

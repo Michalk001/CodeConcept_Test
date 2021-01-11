@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TotalPrice = () => {
+export const Summary = () => {
 
     return (
         <div>Total PRice</div>

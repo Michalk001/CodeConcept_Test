@@ -3,12 +3,14 @@ $button-txt-color: #fff;
 $button-hover-txt-color: #cbcbcb;
 
 .button{
-  background-color: #050203;
+  background-color: $button-background-color;
   color: $button-txt-color;
+  font-size: 16px;
   padding: 10px 15px;
   display: inline-block;
   font-weight: 700;
   border:none;
+  width: inherit;
   &:hover{
     cursor: pointer;
     color:$button-hover-txt-color;
@@ -16,6 +18,5 @@ $button-hover-txt-color: #cbcbcb;
   &:focus{
     outline:none;
   }
-
 
 }
