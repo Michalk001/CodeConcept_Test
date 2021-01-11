@@ -2,11 +2,9 @@
 // Please do not change this file!
 interface CssExports {
   'button': string;
-  'cart': string;
   'flexboxContainer': string;
   'header': string;
   'title': string;
-  'totalPrice': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

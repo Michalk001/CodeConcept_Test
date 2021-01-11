@@ -2,13 +2,16 @@
 // Please do not change this file!
 interface CssExports {
   'button': string;
+  'content': string;
   'grandTotal': string;
   'price': string;
+  'priceLarge': string;
   'subtotal': string;
   'summary': string;
-  'summaryContent': string;
   'text': string;
   'titleSection': string;
+  'total': string;
+  'wrap': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'bottom': string;
+  'cartList': string;
   'grid': string;
   'gridItem': string;
   'gridTitle': string;

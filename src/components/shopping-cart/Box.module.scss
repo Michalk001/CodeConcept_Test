@@ -11,25 +11,6 @@
   }
 }
 
-
-.cart {
-  flex: 10 100px;
-  border: 1px solid $border-color;
-  border-radius: 3px;
-  padding: 40px;
-  box-sizing: border-box;
-  box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
-  -webkit-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
-  -moz-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
-  @media (max-width: 768px) {
-    padding: 5px 5px 10px;
-  }
-}
-
-.totalPrice {
-  flex: 3 100px;
-}
-
 .header{
   display: flex;
   justify-content: space-between;
@@ -42,6 +23,7 @@
 .title{
   font-size: 24px;
   color: $main-color;
+  text-transform: capitalize;
 }
 
 .button{
