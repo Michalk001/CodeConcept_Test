@@ -10,7 +10,7 @@ export const ShoppingCart = () =>{
     const context = useContext(ShoppingContext) as ShoppingCartContextType;
     const {isCheckout,checkout,productCarts} = context;
 
-    if(productCarts.length === 0)
+    if(productCarts.length === 0 && !isCheckout)
         return (
             <div className={styles.message}> There are no more items in your cart</div>
         )

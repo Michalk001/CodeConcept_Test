@@ -27,5 +27,6 @@ export type ShoppingCartContextType = {
     updatePrice: () => void,
     removeProduct:(id: number) => void,
     checkout: () => void,
-    isCheckout:boolean
-}
+    isCheckout:boolean,
+    addProductToCart: (id:number, quantity?:number) => void
+} 

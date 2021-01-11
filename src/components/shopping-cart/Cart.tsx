@@ -2,6 +2,8 @@ import React, {FC, useContext} from "react";
 import styles from "./CartList.module.scss";
 import {IProductCart, ShoppingCartContextType} from "./types";
 import {ShoppingContext} from "./ShoppingContext";
+import config from "../../config.json"
+
 
 interface IProps {
     cart:IProductCart
@@ -13,8 +15,8 @@ export const Cart:FC<IProps> = (props) =>{
 
     return(
         <div className={styles.gridItem}>
-            <div className={styles.remove}><img onClick={() => removeProduct(id)} src={`${window.location.origin }/images/x-img.png`} alt={"remove"}/></div>
-            <div className={styles.imageItem}><img src={`${window.location.origin }/images/${image}`} alt={"headphones"}/></div>
+            <div className={styles.remove}><img onClick={() => removeProduct(id)} src={`${config.API_URL_IMAGE}/images/x-img.png`} alt={"remove"}/></div>
+            <div className={styles.imageItem}><img src={`${config.API_URL_IMAGE}/images/${image}`} alt={"headphones"}/></div>
             <div className={styles.nameItem}>{name}</div>
             <div className={styles.priceItem}>${price}</div>
             <div className={styles.quantityItem}>
@@ -24,7 +26,7 @@ export const Cart:FC<IProps> = (props) =>{
                     <button className={styles.quantityButton} onClick={() => incQuantity(id)}>+</button>
                 </div>
                 <div className={styles.quantityUpdate}>
-                    <img onClick={updatePrice} src={`${window.location.origin }/images/edit-img.png`} alt={"edit"}/>
+                    <img onClick={updatePrice} src={`${config.API_URL_IMAGE}/images/edit-img.png`} alt={"edit"}/>
                 </div>
             </div>
         </div>

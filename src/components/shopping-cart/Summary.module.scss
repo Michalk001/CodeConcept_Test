@@ -50,7 +50,7 @@
 }
 .grandTotal{
   @extend %section;
-
+  align-items: center;
 }
 
 .text{
@@ -61,12 +61,12 @@
 .price{
   color: black;
   font-weight: 700;
-  display: flex;
   align-items: center;
 
 }
 .priceLarge{
   font-size: 21px;
+  font-weight: 700;
 }
 .button{
   margin-top: 20px;
