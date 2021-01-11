@@ -166,7 +166,7 @@
   &Input{
     padding: 5px;
     text-align: center;
-    width: 20px;
+    width: 23px;
     &:active, &:focus{
       box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
       -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.57) inset;
@@ -180,7 +180,9 @@
     margin-left: 2px;
     position: relative;
     padding-top: 1px;
-    cursor: pointer;
+    & > img{
+      cursor: pointer;
+    }
   }
 }
 

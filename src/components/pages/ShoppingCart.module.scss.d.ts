@@ -4,6 +4,7 @@ interface CssExports {
   'button': string;
   'flexboxContainer': string;
   'header': string;
+  'message': string;
   'title': string;
 }
 export const cssExports: CssExports;

@@ -4,12 +4,13 @@ import styles from './Button.module.scss'
 
 interface ButtonProps {
     children:ReactNode
+    onClickHandle?: () => void
 }
 
 export const Button:FC<ButtonProps> = (props) =>{
-    const {children} = props
+    const {children,onClickHandle} = props
     return(
-        <button className={styles.button} >{children}</button>
+        <button onClick={onClickHandle} className={styles.button} >{children}</button>
     )
 }
 
