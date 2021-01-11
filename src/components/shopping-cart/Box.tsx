@@ -41,7 +41,23 @@ export const Box = () =>{
                             </div>
                         </div>
 
-                        
+                        <div className={styles2.gridItem}>
+                            <div className={styles2.remove}><img src={`${window.location.origin }/images/x-img.png`} alt={"remove"}/></div>
+                            <div className={styles2.imageItem}><img src={`${window.location.origin }/images/headphones.png`} alt={"headphones"}/></div>
+                            <div className={styles2.nameItem}>Headphones</div>
+                            <div className={styles2.priceItem}>$11.90</div>
+                            <div className={styles2.quantityItem}>
+                                <div className={styles2.quantityBox}>
+                                    <button className={styles2.quantityButton} onClick={() => console.log("click -")}>-</button>
+                                    <input onChange={() => console.log("click -")} className={styles2.quantityInput} type={"text"} value={22} />
+                                    <button className={styles2.quantityButton} onClick={() => console.log("click -")}>+</button>
+                                </div>
+                                <div className={styles2.quantityUpdate}>
+                                    <img src={`${window.location.origin }/images/edit-img.png`} alt={"edit"}/>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div className={styles2.bottom}>

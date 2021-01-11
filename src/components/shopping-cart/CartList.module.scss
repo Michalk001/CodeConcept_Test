@@ -22,6 +22,7 @@
   @extend .grid;
   padding: 20px 5px;
   @media (max-width: 768px) {
+    gap: 0 10px;
     padding: 20px 0;
     grid-template-rows: repeat(2,1fr);
     grid-template-areas:
@@ -35,7 +36,7 @@
     "remove image image name  name"
     "remove image image price price"
     "remove image image quantity quantity";
-    grid-template-columns: 20px repeat(4,50px) ;
+    grid-template-columns: 20px repeat(2,50px) 70px 60px ;
   }
 }
 .items{
