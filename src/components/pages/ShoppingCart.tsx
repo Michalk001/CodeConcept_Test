@@ -2,13 +2,12 @@ import React from "react";
 import {Button} from "../button/Button";
 
 
-import styles from "./Box.module.scss"
-import {Summary} from "./Summary";
-import {CartList} from "./CartList";
-export const Box = () =>{
+import styles from "./ShoppingCart.module.scss"
+import {CartList,Summary }from "../shopping-cart"
+export const ShoppingCart = () =>{
 
     return(
-        <>
+        <> 
             <div className={styles.header} >
                 <div className={styles.title}>Shopping Cart</div>
                 <div className={styles.button}>
@@ -24,3 +23,4 @@ export const Box = () =>{
     )
 
 }
+
