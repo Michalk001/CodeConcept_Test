@@ -23,7 +23,7 @@ export const Cart: FC<IProps> = (props) => {
       <div className={styles.remove}>
         <img
           onClick={() => removeProduct(id)}
-          src={`${config.API_URL_IMAGE}/images/x-img.png`}
+          src={`/images/x-img.png`}
           alt={"remove"}
         />
       </div>
@@ -60,7 +60,7 @@ export const Cart: FC<IProps> = (props) => {
         <div className={styles.quantityUpdate}>
           <img
             onClick={updatePrice}
-            src={`${config.API_URL_IMAGE}/images/edit-img.png`}
+            src={`/images/edit-img.png`}
             alt={"edit"}
           />
         </div>
