@@ -4,6 +4,7 @@ interface CssExports {
   'bottom': string;
   'grid': string;
   'gridItem': string;
+  'gridTitle': string;
   'image': string;
   'imageItem': string;
   'items': string;
@@ -14,6 +15,7 @@ interface CssExports {
   'priceItem': string;
   'priceTitle': string;
   'quantity': string;
+  'quantityBox': string;
   'quantityButton': string;
   'quantityInput': string;
   'quantityItem': string;

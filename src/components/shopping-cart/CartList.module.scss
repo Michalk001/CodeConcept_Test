@@ -1,18 +1,42 @@
 @import "../variables";
 
 .grid {
-   display: grid;
-   grid-template-columns: 40px 2fr 2fr 3fr 3fr 3fr;
-   grid-template-rows: 1fr;
-   gap: 0 20px;
-   grid-template-areas:
+  display: grid;
+  grid-template-columns: 40px repeat(2,minmax(100px,2fr)) minmax(110px,3fr) minmax(70px,3fr) minmax(130px,3fr);
+  grid-template-rows: 1fr;
+  gap: 0 20px;
+  grid-template-areas:
     "remove image image name price quantity";
-   align-items: center;
+  align-items: center;
+
  }
+
+.gridTitle{
+  @extend .grid;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
 
 .gridItem{
   @extend .grid;
   padding: 20px 5px;
+  @media (max-width: 768px) {
+    padding: 20px 0;
+    grid-template-rows: repeat(2,1fr);
+    grid-template-areas:
+    "remove image image name  name"
+    "remove image image price quantity";
+    grid-template-columns: minmax(20px,40px) repeat(2,50px) minmax(50px,3fr) minmax(130px,3fr);
+  }
+  @media (max-width: 425px) {
+    grid-template-rows: repeat(3,1fr);
+    grid-template-areas:
+    "remove image image name  name"
+    "remove image image price price"
+    "remove image image quantity quantity";
+    grid-template-columns: 20px repeat(4,50px) ;
+  }
 }
 .items{
   margin: 20px 0;
@@ -20,18 +44,27 @@
   border-bottom: 1px solid $border-color;
 }
  %item-text-style{
-  color: $main-color;
+   color: $main-color;
+   word-break: break-all;
 }
 
 %title-text-style {
   color: $main-color;
   font-weight: 700;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .remove{
   grid-area: remove;
   cursor: pointer;
   text-align: center;
+  @media (max-width: 425px) {
+    & > img{
+      width: 20px;
+    }
+  }
 }
 
 .image{
@@ -40,6 +73,11 @@
   &Item{
     @extend .image;
     @extend %item-text-style;
+    @media (max-width: 768px) {
+      & > img{
+        max-width: 100px;
+      }
+    }
   }
 }
 
@@ -67,15 +105,20 @@
   &Title{
     @extend .price;
     @extend %title-text-style;
+
   }
 }
 
 .quantity{
   grid-area: quantity;
   align-items: center;
-  display: flex;
+  justify-content: center;
+  &Box{
+    display: flex;
+  }
   &Item{
     @extend .quantity;
+    display: flex;
     & > div {
       display: inline;
     }
@@ -124,4 +167,9 @@
   display: flex;
   justify-content: flex-end;
   padding: 0 10px;
+  box-sizing: border-box;
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+  }
 }

@@ -1,17 +1,19 @@
 @import "../variables";
 
-.grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr minmax(150px, 350px );
-  grid-template-rows: 1fr;
+.flexboxContainer {
   gap: 0 25px;
-  grid-template-areas:
-    "Cart Cart Cart TotalPrice"
+  display: flex;
+  justify-content: space-between;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 }
 
 
 .cart {
-  grid-area: Cart;
+  flex: 10 100px;
   border: 1px solid $border-color;
   border-radius: 3px;
   padding: 40px;
@@ -19,10 +21,13 @@
   box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
   -webkit-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
   -moz-box-shadow: 3px 3px 5px -4px rgba(0,0,0,0.57);
+  @media (max-width: 768px) {
+    padding: 5px 5px 10px;
+  }
 }
 
 .totalPrice {
-  grid-area: TotalPrice;
+  flex: 3 100px;
 }
 
 .header{
@@ -30,8 +35,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0 20px 0;
+  row-gap: 10px;
+  flex-wrap: wrap;
+
 }
 .title{
   font-size: 24px;
   color: $main-color;
+}
+
+.button{
+  @media (max-width: 425px) {
+    width: 100%;
+    padding: 0 10px;
+  }
 }
