@@ -10,7 +10,6 @@ import config from "../../config.json";
 
 export const ShoppingContext = createContext<ShoppingCartContextType>({
   productCarts: [],
-  addProductToCart: () => {},
   totalPrice: 0,
   updatePrice: () => {},
   shippingPrice: 0,
@@ -36,26 +35,6 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
     {}
   );
 
-  const addProductToCart = (id: number, quantity?: number) => {
-    const isInShoppingCart = productCarts.find(
-      (product) => product.productId === id
-    );
-    if (isInShoppingCart) {
-      setQuantity(id, quantity ? isInShoppingCart.quantity + quantity : 1);
-      return;
-    }
-    const productCart = productList[id];
-    if (!productCart) return;
-
-    setProductCarts((prevState) => [
-      ...prevState,
-      {
-        productId: productCart.id,
-        quantity: quantity && quantity > 0 ? quantity : 1,
-      },
-    ]);
-  };
-
   const getProductList = async () => {
     const res = await fetch(`${config.API_URL}/data/products.json`);
     const products = (await res.json()) as IProduct[];
@@ -70,9 +49,7 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   const getProductCarts = async () => {
     const res = await fetch(`${config.API_URL}/data/cart_products.json`);
     const carts = (await res.json()) as IProductCart[];
-    carts.forEach((cart) => {
-      addProductToCart(cart.productId, cart.quantity);
-    });
+    setProductCarts(carts);
     setIsLoading(false);
   };
 
@@ -121,14 +98,9 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   useEffect(() => {
     (async () => {
       await getProductList();
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
       await getProductCarts();
     })();
-  }, [productList]);
+  }, []);
 
   useEffect(() => {
     updatePrice();
@@ -144,7 +116,6 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
         removeProduct,
         checkout,
         isCheckout,
-        addProductToCart,
         setQuantity,
         isLoading,
         productList,

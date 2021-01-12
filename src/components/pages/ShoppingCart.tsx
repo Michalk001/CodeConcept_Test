@@ -17,6 +17,7 @@ export const ShoppingCart = () => {
 
   if (isCheckout)
     return <div className={styles.message}>{t("shoppingCart.checkout")}</div>;
+
   return (
     <>
       <div className={styles.header}>

@@ -21,5 +21,4 @@ export type ShoppingCartContextType = {
   isCheckout: boolean;
   isLoading: boolean;
   productList: { [id: number]: IProduct };
-  addProductToCart: (id: number, quantity?: number) => void;
 };
