@@ -1,17 +1,11 @@
 import React, {
-  ChangeEvent,
   createContext,
   FC,
   ReactNode,
   useEffect,
   useState,
 } from "react";
-import {
-  IProduct,
-  IProduct_Cart,
-  IProductCart,
-  ShoppingCartContextType,
-} from "./types";
+import { IProduct, IProductCart, ShoppingCartContextType } from "./types";
 import config from "../../config.json";
 
 export const ShoppingContext = createContext<ShoppingCartContextType>({
@@ -23,7 +17,9 @@ export const ShoppingContext = createContext<ShoppingCartContextType>({
   checkout: () => {},
   removeProduct: () => {},
   isCheckout: false,
+  isLoading: true,
   setQuantity: () => {},
+  productList: {},
 });
 
 export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
@@ -35,49 +31,55 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingPrice, setShippingPrice] = useState(defaultShippingPrice);
   const [isCheckout, setIsCheckout] = useState(false);
-
-  const [productList, setProductList] = useState<IProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [productList, setProductList] = useState<{ [id: number]: IProduct }>(
+    {}
+  );
 
   const addProductToCart = (id: number, quantity?: number) => {
-    const isInShoppingCart = productCarts.find((product) => product.id === id);
+    const isInShoppingCart = productCarts.find(
+      (product) => product.productId === id
+    );
     if (isInShoppingCart) {
       setQuantity(id, quantity ? isInShoppingCart.quantity + quantity : 1);
       return;
     }
-    const productCart = productList.find((product) => product.id === id);
+    const productCart = productList[id];
     if (!productCart) return;
+
     setProductCarts((prevState) => [
       ...prevState,
       {
-        id: productCart.id,
+        productId: productCart.id,
         quantity: quantity && quantity > 0 ? quantity : 1,
-        price: productCart.price,
-        image: productCart.image,
-        name: productCart.name,
       },
     ]);
   };
 
   const getProductList = async () => {
     const res = await fetch(`${config.API_URL}/data/products.json`);
-    const products = await res.json();
-    setProductList(products);
+    const products = (await res.json()) as IProduct[];
+    setProductList(
+      products.reduce<{ [id: number]: IProduct }>((obj, product) => {
+        obj[product.id] = product;
+        return obj;
+      }, {})
+    );
   };
 
   const getProductCarts = async () => {
     const res = await fetch(`${config.API_URL}/data/cart_products.json`);
-    const carts = (await res.json()) as IProduct_Cart[];
-    if (productList.length !== 0) {
-      carts.forEach((cart) => {
-        addProductToCart(cart.productId, cart.quantity);
-      });
-    }
+    const carts = (await res.json()) as IProductCart[];
+    carts.forEach((cart) => {
+      addProductToCart(cart.productId, cart.quantity);
+    });
+    setIsLoading(false);
   };
 
   const setQuantity = (id: number, quantity: number) => {
     setProductCarts(
       productCarts.map((product) =>
-        product.id === id
+        product.productId === id
           ? {
               ...product,
               quantity,
@@ -90,20 +92,24 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
   const updatePrice = () => {
     const price =
       Math.round(
-        productCarts.reduce((prev, cur) => prev + cur.quantity * cur.price, 0) *
-          100
+        productCarts.reduce((sum, { productId, quantity }) => {
+          const product = productList[productId];
+          sum += quantity * product.price;
+          return sum;
+        }, 0) * 100
       ) / 100;
 
     setTotalPrice(price);
-    if (price >= freeShippingMinPrice) {
-      setShippingPrice(0);
-    } else {
-      setShippingPrice(freeShippingMinPrice);
-    }
+    const shippingPrice =
+      price >= freeShippingMinPrice ? 0 : freeShippingMinPrice;
+    setTotalPrice(price);
+    setShippingPrice(shippingPrice);
   };
 
   const removeProduct = (id: number) => {
-    const newCartList = productCarts.filter((product) => product.id !== id);
+    const newCartList = productCarts.filter(
+      (product) => product.productId !== id
+    );
     setProductCarts(newCartList);
   };
 
@@ -140,6 +146,8 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
         isCheckout,
         addProductToCart,
         setQuantity,
+        isLoading,
+        productList,
       }}
     >
       {props.children}

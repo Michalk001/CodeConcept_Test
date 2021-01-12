@@ -7,8 +7,10 @@ import { useTranslation } from "react-i18next";
 
 export const ShoppingCart = () => {
   const context = useContext(ShoppingContext);
-  const { isCheckout, checkout, productCarts } = context;
+  const { isCheckout, checkout, productCarts, isLoading } = context;
   const { t } = useTranslation("common");
+
+  if (isLoading) return null;
 
   if (productCarts.length === 0 && !isCheckout)
     return <div className={styles.message}>{t("shoppingCart.empty")}</div>;

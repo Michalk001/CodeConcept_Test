@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import langEN from "./en.json";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";

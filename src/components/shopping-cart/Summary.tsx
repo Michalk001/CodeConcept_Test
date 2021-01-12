@@ -8,7 +8,6 @@ export const Summary = () => {
   const context = useContext(ShoppingContext);
   const { totalPrice, shippingPrice, checkout } = context;
   const { t } = useTranslation("common");
-  console.log(t("summary.free"));
   return (
     <section className={styles.summary}>
       <div className={styles.wrap}>

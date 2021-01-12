@@ -1,15 +1,17 @@
 import React, { ChangeEvent, FC, useContext } from "react";
 import styles from "./CartList.module.scss";
-import { IProductCart } from "./types";
+import { IProduct } from "./types";
 import { ShoppingContext } from "./ShoppingContext";
 import config from "../../config.json";
 
 interface IProps {
-  cart: IProductCart;
+  cart: IProduct;
+  quantity: number;
 }
 
 export const Cart: FC<IProps> = (props) => {
-  const { id, name, image, price, quantity } = props.cart;
+  const { id, name, image, price } = props.cart;
+  const quantity = props.quantity;
   const { setQuantity, updatePrice, removeProduct } = useContext(
     ShoppingContext
   );

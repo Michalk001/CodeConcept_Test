@@ -6,7 +6,9 @@ import { ShoppingContext } from "./ShoppingContext";
 import { useTranslation } from "react-i18next";
 
 export const CartList = () => {
-  const { productCarts, updatePrice } = useContext(ShoppingContext);
+  const { productCarts, updatePrice, productList } = useContext(
+    ShoppingContext
+  );
   const { t } = useTranslation("common");
   return (
     <div className={styles.cartList}>
@@ -16,9 +18,13 @@ export const CartList = () => {
         <div className={styles.quantityTitle}>{t("product.quantity")}</div>
       </div>
       <div className={styles.items}>
-        {productCarts.map((value) => (
-          <Cart cart={value} key={value.id} />
-        ))}
+        {productCarts.map(({ productId, quantity }) => {
+          const product = productList[productId];
+          if (!product) {
+            return null;
+          }
+          return <Cart cart={product} quantity={quantity} key={productId} />;
+        })}
       </div>
 
       <div className={styles.bottom}>

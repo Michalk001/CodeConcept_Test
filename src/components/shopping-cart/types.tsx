@@ -1,5 +1,3 @@
-import { ChangeEvent } from "react";
-
 export interface IProduct {
   id: number;
   name: String;
@@ -7,12 +5,8 @@ export interface IProduct {
   price: number;
 }
 
-export interface IProduct_Cart {
+export interface IProductCart {
   productId: number;
-  quantity: number;
-}
-
-export interface IProductCart extends IProduct {
   quantity: number;
 }
 
@@ -25,5 +19,7 @@ export type ShoppingCartContextType = {
   removeProduct: (id: number) => void;
   checkout: () => void;
   isCheckout: boolean;
+  isLoading: boolean;
+  productList: { [id: number]: IProduct };
   addProductToCart: (id: number, quantity?: number) => void;
 };
