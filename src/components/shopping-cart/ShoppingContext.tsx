@@ -19,6 +19,7 @@ export const ShoppingContext = createContext<ShoppingCartContextType>({
   isLoading: true,
   setQuantity: () => {},
   productList: {},
+  addProductToCart: () => {},
 });
 
 export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
@@ -51,6 +52,22 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
     const carts = (await res.json()) as IProductCart[];
     setProductCarts(carts);
     setIsLoading(false);
+  };
+
+  const addProductToCart = (id: number, quantity: number) => {
+    if (!productList[id]) return;
+    const productCart = productCarts.find((cart) => cart.productId === id);
+    if (productCart) {
+      setQuantity(id, productCart.quantity + quantity);
+      return;
+    }
+    setProductCarts((prevState) => [
+      ...prevState,
+      {
+        quantity: quantity,
+        productId: id,
+      },
+    ]);
   };
 
   const setQuantity = (id: number, quantity: number) => {
@@ -119,6 +136,7 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = (props) => {
         setQuantity,
         isLoading,
         productList,
+        addProductToCart,
       }}
     >
       {props.children}
