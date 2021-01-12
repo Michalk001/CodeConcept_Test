@@ -22,7 +22,11 @@ Example config.json
 
 ```
 
-- API_URL - url to backend server
+- API_URL - url to data server
+- API_URL_IMAGE - url to image server
+## Live version
+
+https://codeconcept-test.netlify.app/
 
 ## Technologies
 
