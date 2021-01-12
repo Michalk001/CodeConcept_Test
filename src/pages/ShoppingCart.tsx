@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Button } from "../button/Button";
+import { Button } from "../components/button/Button";
 import styles from "./ShoppingCart.module.scss";
-import { CartList, Summary } from "../shopping-cart";
-import { ShoppingContext } from "../shopping-cart/ShoppingContext";
+import { Cart, Summary } from "../components/shopping-cart";
+import { ShoppingContext } from "../components/shopping-cart/ShoppingContext";
 import { useTranslation } from "react-i18next";
 
 export const ShoppingCart = () => {
@@ -29,7 +29,7 @@ export const ShoppingCart = () => {
         </div>
       </div>
       <div className={styles.flexboxContainer}>
-        <CartList />
+        <Cart />
         <Summary />
       </div>
     </>

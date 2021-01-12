@@ -1,7 +1,7 @@
 {
   "shoppingCart": {
     "updateCart": "Update Shopping Cart",
-    "empty": "There are no more items in your cart",
+    "empty": "Your cart is empty",
     "checkout": "Your order has been submitted successfully",
     "title": "Shopping Cart"
   },

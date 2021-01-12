@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ShoppingCart } from "./components/pages/ShoppingCart";
+import { ShoppingCart } from "./pages/ShoppingCart";
 import { ShoppingCartProvider } from "./components/shopping-cart/ShoppingContext";
 import styles from "./App.module.scss";
 import { I18nextProvider } from "react-i18next";

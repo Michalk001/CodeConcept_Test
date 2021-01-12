@@ -1,2 +1,2 @@
 export { Summary } from "./Summary";
-export { CartList } from "./CartList";
+export { Cart } from "./Cart";

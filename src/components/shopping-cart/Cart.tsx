@@ -1,81 +1,38 @@
-import React, { ChangeEvent, FC, useContext } from "react";
-import styles from "./CartList.module.scss";
-import { IProduct } from "./types";
+import React, { useContext } from "react";
+import styles from "./Cart.module.scss";
+import { Button } from "../button/Button";
+import { CartItem } from "./CartItem";
 import { ShoppingContext } from "./ShoppingContext";
-import config from "../../config.json";
+import { useTranslation } from "react-i18next";
 
-interface IProps {
-  cart: IProduct;
-  quantity: number;
-}
-
-export const Cart: FC<IProps> = (props) => {
-  const { id, name, image, price } = props.cart;
-  const quantity = props.quantity;
-  const { setQuantity, updatePrice, removeProduct } = useContext(
+export const Cart = () => {
+  const { productCarts, updatePrice, productList } = useContext(
     ShoppingContext
   );
-
-  const addQuantity = (id: number, value: number) => {
-    setQuantity(id, quantity + value);
-  };
-
-  const handleInputQuantity = (
-    e: ChangeEvent<HTMLInputElement>,
-    id: number
-  ) => {
-    const quantity = e.target.value;
-    if (parseInt(quantity) || quantity === "" || quantity[0] === "0") {
-      setQuantity(id, parseInt(quantity));
-    }
-  };
-
+  const { t } = useTranslation("common");
   return (
-    <div className={styles.gridItem}>
-      <div className={styles.remove}>
-        <img
-          onClick={() => removeProduct(id)}
-          src={`/images/x-img.png`}
-          alt={"remove"}
-        />
+    <div className={styles.cartList}>
+      <div className={styles.gridTitle}>
+        <div className={styles.nameTitle}>{t("product.productName")}</div>
+        <div className={styles.priceTitle}>{t("product.unitPrice")}</div>
+        <div className={styles.quantityTitle}>{t("product.quantity")}</div>
       </div>
-      <div className={styles.imageItem}>
-        <img
-          src={`${config.API_URL_IMAGE}/images/${image}`}
-          alt={"headphones"}
-        />
+      <div className={styles.items}>
+        {productCarts.map(({ productId, quantity }) => {
+          const product = productList[productId];
+          if (!product) {
+            return null;
+          }
+          return (
+            <CartItem cart={product} quantity={quantity} key={productId} />
+          );
+        })}
       </div>
-      <div className={styles.nameItem}>{name}</div>
-      <div className={styles.priceItem}>${price}</div>
-      <div className={styles.quantityItem}>
-        <div className={styles.quantityBox}>
-          <button
-            className={styles.quantityButton}
-            onClick={() => addQuantity(id, -1)}
-          >
-            -
-          </button>
-          <input
-            title={`${quantity}`}
-            onChange={(e) => handleInputQuantity(e, id)}
-            className={styles.quantityInput}
-            type={"text"}
-            value={quantity}
-          />
-          <button
-            className={styles.quantityButton}
-            onClick={() => addQuantity(id, +1)}
-          >
-            +
-          </button>
-        </div>
-        <div className={styles.quantityUpdate}>
-          <img
-            onClick={updatePrice}
-            src={`/images/edit-img.png`}
-            alt={"edit"}
-          />
-        </div>
+
+      <div className={styles.bottom}>
+        <Button onClickHandle={updatePrice}>
+          {t("shoppingCart.updateCart")}
+        </Button>
       </div>
     </div>
   );
